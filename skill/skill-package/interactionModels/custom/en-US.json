@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "typescript node boilerplate",
+            "invocationName": "mr math",
             "intents": [
                 {
                     "name": "AMAZON.FallbackIntent"

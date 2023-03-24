@@ -7,7 +7,7 @@
           "shell": "${workspaceFolder}/scripts/get_ask_token"
         },
         "SKILL_ID": {
-          "shell": "${workspaceFolder}/scripts/get_ask_skill_id typescript_node_boilerplate"
+          "shell": "${workspaceFolder}/scripts/get_ask_skill_id mr_math"
         }
       },
       "configuration": {
