@@ -1,0 +1,35 @@
+{
+  "configurations": {
+    "run": {
+      "adapter": "vscode-node",
+      "variables": {
+        "ACCESS_TOKEN": {
+          "shell": "${workspaceFolder}/scripts/get_ask_token"
+        },
+        "SKILL_ID": {
+          "shell": "${workspaceFolder}/scripts/get_ask_skill_id typescript_node_boilerplate"
+        }
+      },
+      "configuration": {
+        "type": "pwa-node",
+        "request": "launch",
+        "program": "${workspaceFolder}/skill/lambda/node_modules/ask-sdk-local-debug/dist/LocalDebuggerInvoker.js",
+        "args": [
+          "--accessToken",
+          "${ACCESS_TOKEN}",
+          "--skillId",
+          "${SKILL_ID}",
+          "--handlerName",
+          "handler",
+          "--skillEntryFile",
+          "${workspaceFolder}/skill/lambda/dist/index.js",
+          "--region",
+          "NA"
+        ],
+        "cwd": "${workspaceFolder}/skill/lambda",
+        "outFiles": ["${workspaceRoot}/skill/lambda/dist/**/*.js"]
+      }
+    }
+  }
+}
+

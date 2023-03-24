@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "set-env",
+      "type": "shell",
+      "command": "${workspaceFolder}/scripts/get_env > ${workspaceFolder}/.env.launch.local",
+      "dependsOn": ["build"]
+    },
+    {
+      "label": "build",
+      "type": "shell",
+      "command": "npm run build"
+    }
+  ]
+}

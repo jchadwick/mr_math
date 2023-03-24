@@ -1,0 +1,7 @@
+root = true
+
+[**/*.js]
+quote_type = single
+
+[**/*.ts]
+quote_type = single

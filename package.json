@@ -1,0 +1,25 @@
+{
+  "name": "ask_helpers",
+  "version": "1.0.0",
+  "description": "------ # Requirements",
+  "main": "index.js",
+  "scripts": {
+    "ask-dialog": "cd skill/lambda && npm run ask-dialog",
+    "build": "cd skill/lambda && npm run build",
+    "build-deploy": "cd skill/lambda && npm run build-deploy",
+    "install": "cd skill/lambda && npm install",
+    "refresh-token": "cd skill/lambda && npm run refresh-token",
+    "start": "cd skill/lambda && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joedbenjamin/ask_helpers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joedbenjamin/ask_helpers/issues"
+  },
+  "homepage": "https://github.com/joedbenjamin/ask_helpers#readme"
+}

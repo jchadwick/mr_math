@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# default skill name to first parameter
+skill_name=$1
+
+# otherwise, use current dir name
+if [[ -z "$skill_name" ]] ; then
+    skill_name=$(basename $(pwd))
+fi
+
+# default skill name to second parameter
+invocation_name=$2
+
+# otherwise, derive from skill name
+if [[ -z "$invocation_name" ]] ; then
+    invocation_name=$(echo $skill_name | sed "s/_/ /g")
+fi
+
+printf "Replacing boilerplate skill name with $skill_name...\n"
+printf "Replacing boilerplate invocation name with $invocation_name...\n"
+
+if [[ $(uname) == 'Darwin' ]]; then
+    sed -i '' -e "s/typescript_node_boilerplate/$skill_name/" ./skill/skill-package/skill.json ./.vimspector.json ./skill/lambda/package.json
+    sed -i '' -e "s/typescript node boilerplate/$invocation_name/" ./skill/skill-package/interactionModels/custom/en-US.json
+else
+    sed -i "s/typescript_node_boilerplate/$skill_name/" ./skill/skill-package/skill.json ./.vimspector.json ./skill/lambda/package.json
+    sed -i "s/typescript\snode\sboilerplate/$invocation_name/" ./skill/skill-package/interactionModels/custom/en-US.json
+fi
+
+cd ./skill/lambda
+npm ci
+cd ../..
+
+rm -rf init_repo
