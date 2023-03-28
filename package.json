@@ -9,7 +9,8 @@
     "build-deploy": "cd skill/lambda && npm run build-deploy",
     "install": "cd skill/lambda && npm install",
     "refresh-token": "cd skill/lambda && npm run refresh-token",
-    "start": "cd skill/lambda && npm run start"
+    "start": "cd skill/lambda && npm run start",
+    "build-model": "cd skill/lambda && npm run build-model"
   },
   "repository": {
     "type": "git",

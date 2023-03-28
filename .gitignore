@@ -98,3 +98,5 @@ skill/skill-package/skill.json
 
 # dist output
 dist/
+
+skill/skill-package/interactionModels/custom/en-US.json

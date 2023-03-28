@@ -7,14 +7,15 @@
   "main": "index.js",
   "scripts": {
     "ask-dialog": "cd .. && ask dialog",
-    "build": "run-s clean compile",
+    "build": "run-s clean compile build-model",
     "build-production": "run-s build && cp package.json ./dist && cd dist && npm i --production",
     "build-deploy": "run-s build-production deploy",
     "clean": "rimraf dist",
     "compile": "tsc --build tsconfig.json",
     "deploy": "cd ../; ask deploy",
     "refresh-token": "../../scripts/set_ask_token",
-    "start": "run-s build ask-dialog"
+    "start": "run-s build ask-dialog",
+    "build-model": "./build_interaction_model.ts"
   },
   "dependencies": {
     "ask-sdk-controls": "^0.9.2",
