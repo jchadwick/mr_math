@@ -94,6 +94,7 @@ node_modules/
 
 # ASK tempfiles
 .ask/
+skill/skill-package/skill.json
 
 # dist output
 dist/
