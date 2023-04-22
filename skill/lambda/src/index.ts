@@ -9,6 +9,25 @@ import {
   ControlInput,
   ControlResultBuilder,
 } from 'ask-sdk-controls';
+import { IntentRequest } from 'ask-sdk-model';
+
+abstract class IntentControl extends Control {
+  constructor(protected intent: string) {
+    super(new.target.name);
+  }
+
+  canHandle(input: ControlInput): boolean | Promise<boolean> {
+    return InputUtil.isIntent(input, this.intent);
+  }
+
+  takeInitiative(
+    _: ControlInput,
+    __: ControlResultBuilder
+  ): void | Promise<void> {}
+  canTakeInitiative() {
+    return false;
+  }
+}
 
 abstract class LiteralContentControl extends Control {
   constructor(public literalContent: any, public endSession: boolean) {
@@ -53,10 +72,27 @@ class SessionEndedRequestControl extends LiteralContentControl {
   }
 }
 
-class HelloResponseControl extends LiteralContentControl {
-  canHandle(input: ControlInput) {
-    const canHandle = InputUtil.isIntent(input, 'HelloWorldIntent');
-    return canHandle;
+class AnswerIntentControl extends IntentControl {
+  constructor() {
+    super('AnswerIntent');
+  }
+
+  async handle(input: ControlInput, resultBuilder: ControlResultBuilder) {
+    const answer = +Alexa.getSlotValue(
+      input.handlerInput.requestEnvelope,
+      'answer'
+    );
+
+    const correctAnswer = 2;
+    const isCorrectAnswer = answer === correctAnswer;
+
+    const response = isCorrectAnswer ? 'Correct!' : 'Incorrect, try again.';
+
+    resultBuilder.addAct(
+      new LiteralContentAct(this, {
+        promptFragment: `You answered ${answer}, which is ${response} What's 1+1?`,
+      })
+    );
   }
 }
 
@@ -66,13 +102,16 @@ class FallbackResponseControl extends LiteralContentControl {
   }
 }
 
-class HelloControl extends ContainerControl {
+class MrMathGameControl extends ContainerControl {
   constructor(props: any) {
     super(props);
     this.addChild(
-      new LaunchRequestControl("what's up? can I help you today?", false)
+      new LaunchRequestControl(
+        "Welcome to Mr Math.  Let's get started! What's 1+1?",
+        false
+      )
     )
-      .addChild(new HelloResponseControl('hello world', false))
+      .addChild(new AnswerIntentControl())
       .addChild(
         new StopOrCancelIntentControl(
           "I guess you don't want to talk anymore",
@@ -91,7 +130,7 @@ class HelloControl extends ContainerControl {
 
 class HelloManager extends ControlManager {
   createControlTree() {
-    return new HelloControl({ id: 'HelloControl' });
+    return new MrMathGameControl({ id: 'HelloControl' });
   }
 }
 
